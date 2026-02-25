@@ -2,27 +2,23 @@ package fate.ram.bookshop.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.Data;
 
-@Entity
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+
 @Data
+@Document(collection = "review")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String reviewerName;
     private float rating;
     private String comment;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    @JsonManagedReference
+    @DocumentReference
     private Book book;
 }

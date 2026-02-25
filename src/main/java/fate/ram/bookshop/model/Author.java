@@ -2,24 +2,20 @@ package fate.ram.bookshop.model;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
 
-@Entity
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
 @Data
+@Document(collection = "author")
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
     private String biography;
     private String portraitUrl;
 
-    @OneToMany(mappedBy = "author")
-    private List<Book> books;
 }

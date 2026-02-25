@@ -23,7 +23,7 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public void deleteBook(Long id) {
+    public void deleteBook(String id) {
         bookRepository.deleteById(id);
     }
 }

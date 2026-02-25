@@ -5,22 +5,18 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
 
-@Entity
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+
 @Data
+@Document(collection = "books")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String title;
 
@@ -32,16 +28,10 @@ public class Book {
 
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    @JsonBackReference
+    @DocumentReference
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @DocumentReference
     private Category category;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Review> reviews;
 }
