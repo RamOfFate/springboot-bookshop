@@ -28,8 +28,7 @@ public class Book {
 
     private String imageUrl;
 
-    @DocumentReference
-    private Author author;
+    private String author;
 
     @DocumentReference
     private Category category;
